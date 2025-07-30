@@ -53,21 +53,46 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    document.getElementById("dgg-tabs-list").innerHTML =
-      `<div class="dgg-tabs-list-header">
-        <span class="dgg-tabs-list-title">jump to</span>
-        <button id="dgg-close-all" class="dgg-close-all-btn">Close All</button>
-      </div>` +
-      tabs
-        .map(
-          (tab) => `
-      <div class="dgg-tabs-list-item">
-        <span data-tabid="${tab.id}" class="dgg-jump">${getTabLabel(tab)}</span>
-        <button data-tabid="${tab.id}" class="dgg-close">✕</button>
-      </div>
-    `
-        )
-        .join("");
+    // With this:
+    const tabsListDiv = document.getElementById("dgg-tabs-list");
+    tabsListDiv.innerHTML = ""; // Clear previous content
+
+    // Header
+    const headerDiv = document.createElement("div");
+    headerDiv.className = "dgg-tabs-list-header";
+
+    const titleSpan = document.createElement("span");
+    titleSpan.className = "dgg-tabs-list-title";
+    titleSpan.textContent = "jump to";
+
+    const closeAllBtn = document.createElement("button");
+    closeAllBtn.id = "dgg-close-all";
+    closeAllBtn.className = "dgg-close-all-btn";
+    closeAllBtn.textContent = "Close All";
+
+    headerDiv.appendChild(titleSpan);
+    headerDiv.appendChild(closeAllBtn);
+    tabsListDiv.appendChild(headerDiv);
+
+    // Tab items
+    tabs.forEach((tab) => {
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "dgg-tabs-list-item";
+
+      const jumpSpan = document.createElement("span");
+      jumpSpan.dataset.tabid = tab.id;
+      jumpSpan.className = "dgg-jump";
+      jumpSpan.textContent = getTabLabel(tab);
+
+      const closeBtn = document.createElement("button");
+      closeBtn.dataset.tabid = tab.id;
+      closeBtn.className = "dgg-close";
+      closeBtn.textContent = "✕";
+
+      itemDiv.appendChild(jumpSpan);
+      itemDiv.appendChild(closeBtn);
+      tabsListDiv.appendChild(itemDiv);
+    });
   }
   // Toggle list visibility
   menu.addEventListener("click", function (e) {

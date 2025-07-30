@@ -11,6 +11,10 @@ This Firefox extension embeds the Destiny.gg chat in a sidebar panel, similar to
 
 Install from [Firefox Browser Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/destiny-chat-sidebar/).
 
+## Todo
+
+- remove query params form open tabs list
+
 ## Debugging
 
 ### Method 1: Load as Temporary Extension (for testing)
