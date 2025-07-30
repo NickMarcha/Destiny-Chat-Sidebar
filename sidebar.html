@@ -17,12 +17,44 @@
             height: 100%;
             border: none;
         }
+
+        .dgg-menu-btn {
+            background: #222;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px #0008;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: fit-content;
+            line-height: 1;
+            text-decoration: none;
+            padding: 4px 8px;
+        }
+
+        #dgg-close-all {
+            background: rgb(124, 1, 1);
+            color: #fff;
+            border-radius: 10px;
+            border-color: transparent;
+        }
     </style>
 </head>
 
 <body>
     <iframe id="chatFrame" src="https://www.destiny.gg/embed/chat" title="Destiny.gg Chat">
     </iframe>
+    <div id="dgg-tabs-menu" class="dgg-menu-btn"
+        style="position: absolute; bottom: 0px; left: 50%; transform: translateX(-50%); z-index: 10; width: auto;">
+        <span id="dgg-tabs-count-prefix">d.gg tabs =</span>
+        <span id="dgg-tabs-count">0</span>
+        <div id="dgg-tabs-list"
+            style="display: none; background: #333; color: #fff; position: absolute; left: 50%; transform: translateX(-50%); bottom: 36px; min-width: 180px; max-width: 320px; max-height: 200px; overflow-y: auto; border-radius: 6px; box-shadow: 0 2px 8px #0008;">
+        </div>
+    </div>
     <script src="sidebar.js"></script>
 </body>
 
