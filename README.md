@@ -7,6 +7,7 @@ This Firefox extension embeds the Destiny.gg chat in a sidebar panel, similar to
 - Clean sidebar integration using Firefox's native sidebar API
 - Sidebar stays open as you switch tabs, resize the sidebar by dragging its edge
 - Cleans up /bigscreen to hide chat and keep embeds menu. (can be disabled through extension menu)
+- manage all tabs which have d.gg open, jump to, close, and close all implemented.
 
 Install from [Firefox Browser Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/destiny-chat-sidebar/).
 

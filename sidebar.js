@@ -21,15 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
         openLink.id = "dgg-open-bigscreen";
         openLink.textContent = "open bigscreen";
         openLink.className = "dgg-menu-btn";
-        openLink.style.cssText =
-          "display:flex;align-items:center;justify-content:center;position:absolute;bottom:0;left:50%;transform:translateX(-50%);z-index:10;text-decoration:none;";
         openLink.onclick = () =>
           browser.tabs.create({ url: "https://www.destiny.gg/bigscreen" });
         document
           .getElementById("dgg-tabs-menu")
           .parentNode.appendChild(openLink);
       }
-      openLink.style.display = "block";
+      openLink.style.display = "flex";
       return;
     } else {
       countPrefixSpan.textContent = "d.gg tabs ="; // Restore prefix text
@@ -56,19 +54,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     document.getElementById("dgg-tabs-list").innerHTML =
-      `<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;">
-      <span style="color:#aaa; font-size:12px; text-align:left;">jump to</span>
-      <button id="dgg-close-all" style="background:rgb(124,1,1);color:#fff;border-radius:10px;border:none;font-size:12px;padding:2px 8px;cursor:pointer;">Close All</button>
-   </div>` +
+      `<div class="dgg-tabs-list-header">
+        <span class="dgg-tabs-list-title">jump to</span>
+        <button id="dgg-close-all" class="dgg-close-all-btn">Close All</button>
+      </div>` +
       tabs
         .map(
           (tab) => `
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;">
-        <span data-tabid="${
-          tab.id
-        }" class="dgg-jump" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;color:#4af;text-decoration:underline;">${getTabLabel(
-            tab
-          )}</span>
+      <div class="dgg-tabs-list-item">
+        <span data-tabid="${tab.id}" class="dgg-jump">${getTabLabel(tab)}</span>
         <button data-tabid="${tab.id}" class="dgg-close">✕</button>
       </div>
     `
