@@ -1,7 +1,5 @@
-.embed-info {
-  .embed-info__type::after {
-    display: none;
-  }
+.embed-info .embed-info__type::after {
+  display: none;
 }
 .navbar {
   background-color: #262626;
@@ -23,7 +21,9 @@
   flex-direction: column;
 }
 
-#embed,
+#embed {
+  width: 100vw !important;
+}
 .stream-panel__wrap,
 #stream-controls,
 #chat-panel {
@@ -70,4 +70,37 @@
 #swap,
 #close {
   display: none;
+}
+
+#bigscreen-layout,
+#stream-panel {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100vh !important;
+  min-height: 0 !important;
+}
+
+#stream-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+}
+
+#embed,
+.stream-panel__embed {
+  flex: 1 1 0% !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: 100% !important;
+  aspect-ratio: 16/9 !important;
+  position: relative;
+  z-index: 3;
+}
+
+#chat-panel {
+  flex-shrink: 0 !important;
+  min-width: 300px;
+  width: 100% !important;
 }

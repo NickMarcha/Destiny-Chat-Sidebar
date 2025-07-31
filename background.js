@@ -7,3 +7,7 @@ browser.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     });
   }
 });
+
+browser.runtime.onInstalled.addListener(() => {
+  browser.storage.local.set({ styleEnabled: true });
+});
