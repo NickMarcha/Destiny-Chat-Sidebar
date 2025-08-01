@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Destiny Chat Sidebar",
-  "version": "1.3",
+  "version": "1.4",
   "description": "Embed Destiny.gg chat in Firefox sidebar",
 
   "permissions": ["tabs", "storage", "https://www.destiny.gg/*"],
@@ -14,6 +14,14 @@
       "128": "icons/icon-128.png"
     }
   },
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.destiny.gg/*"],
+      "js": ["ws-intercept.js"],
+      "run_at": "document_start"
+    }
+  ],
 
   "background": {
     "scripts": ["background.js"]
