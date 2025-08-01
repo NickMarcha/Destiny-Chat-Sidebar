@@ -73,3 +73,56 @@ browser.runtime.onMessage.addListener((msg, sender) => {
       */
   }
 });
+
+// --- Destiny.gg WebSocket connection in background.js ---
+let ws;
+function connectDggWebSocket() {
+  if (ws && ws.readyState === WebSocket.OPEN) return;
+
+  ws = new WebSocket("wss://live.destiny.gg/socket");
+
+  ws.onopen = () => {
+    console.log("Connected to Destiny.gg WebSocket");
+  };
+
+  ws.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      if (
+        data.type === "dggApi:streamInfo" &&
+        data.data &&
+        data.data.streams &&
+        data.data.streams.youtube
+      ) {
+        const isLive = !!data.data.streams.youtube.live;
+        // Broadcast to all extension parts (sidebar, popup, etc.)
+        browser.runtime.sendMessage({ dggLiveStatus: isLive });
+      }
+    } catch (e) {}
+  };
+
+  ws.onclose = (event) => {
+    console.log("WebSocket closed, reconnecting in 5s...");
+    console.log(
+      "Close event code:",
+      event.code,
+      "reason:",
+      event.reason,
+      "wasClean:",
+      event.wasClean
+    );
+    setTimeout(connectDggWebSocket, 5000);
+  };
+
+  ws.onerror = (err) => {
+    console.error("WebSocket error event:", err);
+    if (ws) {
+      console.error("WebSocket readyState:", ws.readyState); // 0=CONNECTING, 1=OPEN, 2=CLOSING, 3=CLOSED
+      console.error("WebSocket URL:", ws.url);
+    }
+    ws.close();
+  };
+}
+
+// Start the connection when the extension loads
+connectDggWebSocket();

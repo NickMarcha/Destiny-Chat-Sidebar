@@ -1,10 +1,15 @@
 {
   "manifest_version": 2,
   "name": "Destiny Chat Sidebar",
-  "version": "1.4",
+  "version": "1.5",
   "description": "Embed Destiny.gg chat in Firefox sidebar",
 
-  "permissions": ["tabs", "storage", "https://www.destiny.gg/*"],
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://www.destiny.gg/*",
+    "wss://*.destiny.gg/"
+  ],
 
   "sidebar_action": {
     "default_title": "Destiny Chat",
@@ -14,14 +19,6 @@
       "128": "icons/icon-128.png"
     }
   },
-
-  "content_scripts": [
-    {
-      "matches": ["https://www.destiny.gg/*"],
-      "js": ["ws-intercept.js"],
-      "run_at": "document_start"
-    }
-  ],
 
   "background": {
     "scripts": ["background.js"]
@@ -37,5 +34,11 @@
     "128": "icons/icon-128.png"
   },
 
-  "web_accessible_resources": ["sidebar.html", "dgg-sidebar-styles.css"]
+  "web_accessible_resources": ["sidebar.html", "dgg-sidebar-styles.css"],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "destiny-chat-sidebar@SageWaffle.com"
+    }
+  }
 }
